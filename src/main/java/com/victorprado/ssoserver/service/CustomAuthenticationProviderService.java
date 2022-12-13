@@ -30,7 +30,7 @@ public class CustomAuthenticationProviderService implements AuthenticationProvid
   }
 
   private Authentication checkPassword(UserDetails user, String rawPassword) {
-    if (encoder.matches(user.getPassword(), rawPassword)) {
+    if (encoder.matches(rawPassword, user.getPassword())) {
       return new UsernamePasswordAuthenticationToken(
         user.getUsername(),
         user.getPassword(),

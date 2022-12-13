@@ -7,5 +7,7 @@ spring:
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
+    hikari:
+      schema: sso_server
   jpa:
     show-sql: true
