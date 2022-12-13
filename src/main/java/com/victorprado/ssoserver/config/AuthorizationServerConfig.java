@@ -27,6 +27,7 @@ import org.springframework.security.oauth2.server.authorization.client.InMemoryR
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.ClientSettings;
+import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration(proxyBeanMethods = false)
@@ -69,6 +70,13 @@ public class AuthorizationServerConfig {
     RSAKey rsaKey = generateRsa();
     JWKSet jwkSet = new JWKSet(rsaKey);
     return ((jwkSelector, securityContext) -> jwkSelector.select(jwkSet));
+  }
+
+  @Bean
+  public ProviderSettings providerSettings() {
+    return ProviderSettings.builder()
+      .issuer("http://auth-server:9000")
+      .build();
   }
 
   private RSAKey generateRsa() {
